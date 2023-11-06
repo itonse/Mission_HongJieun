@@ -12,14 +12,17 @@ public class QuotationService {
     private static int id = 0;
     private final Scanner scanner = new Scanner(System.in);
 
+    private String inputContent;
+    private String inputAuthorName;
+
     public void addQuotation() {
         System.out.print("명언 : ");
-        String inputContent = scanner.nextLine();
+        inputContent = scanner.nextLine();
         System.out.print("작가 : ");
-        String inputAuthorName = scanner.nextLine();
+        inputAuthorName = scanner.nextLine();
 
-        if (inputContent.isEmpty() || inputAuthorName.isEmpty()) {
-            System.out.println("명언 또는 작가명은 공백일 수 없습니다.");
+        if (!isValidInput(inputContent, inputAuthorName)) {
+            return;
         }
 
         Quotation quotation = new Quotation(++id, inputContent, inputAuthorName);
@@ -48,8 +51,44 @@ public class QuotationService {
 
         if (quotationRepository.existsById(id)) {
             quotationRepository.deleteById(id);
+            System.out.println(id + "번 명언이 삭제되었습니다.");
         } else {
             System.out.println(id + "번 명언은 존재하지 않습니다.");
         }
+    }
+
+    public void modifyQuotation(Rq rq) {
+        int id = rq.parseInt("id", 0);
+
+        if (quotationRepository.existsById(id)) {
+            Quotation quotation = quotationRepository.findById(id);
+
+            System.out.print("명언(기존) : ");
+            System.out.println(quotation.getContent());
+            System.out.print("명언 : ");
+            inputContent = scanner.nextLine();
+
+            System.out.print("작가(기존) : ");
+            System.out.println(quotation.getAuthorName());
+            System.out.print("작가 : ");
+            inputAuthorName = scanner.nextLine();
+
+            if (!isValidInput(inputContent, inputAuthorName)) {
+                return;
+            }
+
+            quotation.setContent(inputContent);
+            quotation.setAuthorName(inputAuthorName);
+        } else {
+            System.out.println(id + "번 명언은 존재하지 않습니다.");
+        }
+    }
+
+    private boolean isValidInput(String inputContent, String inputAuthorName) {
+        if (inputContent.isEmpty() || inputAuthorName.isEmpty()) {
+            System.out.println("명언 또는 작가명은 공백일 수 없습니다.");
+            return false;
+        }
+        return true;
     }
 }

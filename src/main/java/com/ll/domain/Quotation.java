@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
 @AllArgsConstructor
 public class Quotation {
-    int id;
-    String content;
-    String authorName;
+    @Getter
+    private int id;
+    @Setter
+    @Getter
+    private String content;
+    @Setter
+    @Getter
+    private String authorName;
 }

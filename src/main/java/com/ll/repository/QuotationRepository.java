@@ -29,4 +29,8 @@ public class QuotationRepository {
 
         return true;
     }
+
+    public Quotation findById(int id) {
+        return quotations.get(id - 1);
+    }
 }

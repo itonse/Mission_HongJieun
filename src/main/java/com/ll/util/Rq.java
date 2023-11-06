@@ -7,10 +7,9 @@ import java.util.List;
 
 public class Rq {
     @Getter
-    private String action;
-    private String queryString;
-    private List<String> paramNames = new ArrayList<>();    // 명령이름
-    private List<String> paramValues = new ArrayList<>();    // 명령에서의 값
+    private final String action;
+    private final List<String> paramNames = new ArrayList<>();    // 명령이름
+    private final List<String> paramValues = new ArrayList<>();    // 명령에서의 값
 
     public Rq(String cmd) {
         String[] cmdBits = cmd.split("\\?", 2);  // 명령을 '?' 를 기준으로 두 문자열로 분리
@@ -20,7 +19,7 @@ public class Rq {
             return;
         }
 
-        queryString = cmdBits[1].trim();     // 두 번째 문자열: 명령 파라미터(들)  ex) "id=5&name=John"
+        String queryString = cmdBits[1].trim();     // 두 번째 문자열: 명령 파라미터(들)  ex) "id=5&name=John"
 
         String[] queryStringBits = queryString.split("&");    // (확장성) 명령 파라미터가 여러개일 경우, '&' 문자 기준으로 분리 ex) "id=5", "name=John"
 

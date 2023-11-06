@@ -17,4 +17,8 @@ public class QuotationController {
     public void delete(Rq rq) {
         quotationService.deleteQuotation(rq);
     }
+
+    public void modify(Rq rq) {
+        quotationService.modifyQuotation(rq);
+    }
 }
