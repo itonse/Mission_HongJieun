@@ -1,15 +1,15 @@
 package com.ll.base;
 
+import com.ll.util.Parsing;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Rq {
     @Getter
     private final String action;
-    private final List<String> paramNames = new ArrayList<>();    // 명령이름
-    private final List<String> paramValues = new ArrayList<>();    // 명령에서의 값
+    private final Map<String, String> paramsMap = new HashMap<>();
 
     public Rq(String cmd) {
         String[] cmdBits = cmd.split("\\?", 2);  // 명령을 '?' 를 기준으로 두 문자열로 분리
@@ -30,21 +30,11 @@ public class Rq {
             String paramName = queryParamStrBits[0];   // "id"
             String paramValue = queryParamStrBits[1];   // "5"
 
-            paramNames.add(paramName);
-            paramValues.add(paramValue);
+            paramsMap.put(paramName, paramValue);
         }
     }
-    public int parseInt(String paramName, int defaultValue) {
-        int index = paramNames.indexOf(paramName);
 
-        if (index == -1) return defaultValue;
-
-        String paramValue = paramValues.get(index);
-
-        try {
-            return Integer.parseInt(paramValue);
-        } catch (NumberFormatException e) {
-            return defaultValue;
-        }
+    public int getParseInt(String paramName, int defaultValue) {
+        return Parsing.str.parseInt(paramsMap.get(paramName), defaultValue);
     }
 }

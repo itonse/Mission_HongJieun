@@ -47,7 +47,7 @@ public class QuotationService {
     }
 
     public void deleteQuotation(Rq rq) {
-        int id = rq.parseInt("id", 0);
+        int id = rq.getParseInt("id", 0);
 
         if (quotationRepository.existsById(id)) {
             quotationRepository.deleteById(id);
@@ -58,7 +58,7 @@ public class QuotationService {
     }
 
     public void modifyQuotation(Rq rq) {
-        int id = rq.parseInt("id", 0);
+        int id = rq.getParseInt("id", 0);
 
         if (quotationRepository.existsById(id)) {
             Quotation quotation = quotationRepository.findById(id);
