@@ -5,12 +5,19 @@ import com.ll.repository.QuotationRepository;
 import com.ll.util.Rq;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class QuotationService {
     private final QuotationRepository quotationRepository = new QuotationRepository();
     private static int id = 0;
+    private final Scanner scanner = new Scanner(System.in);
 
-    public void addQuotation(String inputContent, String inputAuthorName) {
+    public void addQuotation() {
+        System.out.print("명언 : ");
+        String inputContent = scanner.nextLine();
+        System.out.print("작가 : ");
+        String inputAuthorName = scanner.nextLine();
+
         if (inputContent.isEmpty() || inputAuthorName.isEmpty()) {
             System.out.println("명언 또는 작가명은 공백일 수 없습니다.");
         }

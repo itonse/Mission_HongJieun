@@ -3,19 +3,11 @@ package com.ll.controller;
 import com.ll.service.QuotationService;
 import com.ll.util.Rq;
 
-import java.util.Scanner;
-
 public class QuotationController {
     private final QuotationService quotationService = new QuotationService();
-    private final Scanner scanner = new Scanner(System.in);
 
     public void add() {
-        System.out.print("명언 : ");
-        String inputContent = scanner.nextLine();
-        System.out.print("작가 : ");
-        String inputAuthorName = scanner.nextLine();
-
-        quotationService.addQuotation(inputContent, inputAuthorName);
+        quotationService.addQuotation();
     }
 
     public void list() {
