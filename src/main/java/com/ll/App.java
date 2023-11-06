@@ -1,6 +1,8 @@
 package com.ll;
 
 import com.ll.controller.QuotationController;
+import com.ll.util.Rq;
+
 import java.util.Scanner;
 
 public class App {
@@ -12,9 +14,10 @@ public class App {
 
         while (true) {
             System.out.print("명령) ");
-            String request = scanner.nextLine();
+            String cmd = scanner.nextLine();
+            Rq rq = new Rq(cmd);
 
-            switch (request) {
+            switch (rq.getAction()) {
                 case "종료":
                     return;
                 case "등록":
