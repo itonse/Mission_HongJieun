@@ -39,8 +39,10 @@ public class QuotationService {
     public void deleteQuotation(Rq rq) {
         int id = rq.parseInt("id", 0);
 
-        quotationRepository.deleteById(id);
-
-        System.out.println(id);
+        if (quotationRepository.existsById(id)) {
+            quotationRepository.deleteById(id);
+        } else {
+            System.out.println(id + "번 명언은 존재하지 않습니다.");
+        }
     }
 }

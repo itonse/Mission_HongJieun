@@ -19,4 +19,14 @@ public class QuotationRepository {
     public void deleteById(int id) {
         quotations.remove(id - 1);
     }
+
+    public boolean existsById(int id) {
+        try {
+            quotations.get(id - 1);
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+
+        return true;
+    }
 }
