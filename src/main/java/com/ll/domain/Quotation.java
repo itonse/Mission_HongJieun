@@ -1,10 +1,14 @@
-package com.ll;
+package com.ll.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @AllArgsConstructor
 public class Quotation {
     int id;
     String content;
-    String autorName;
+    String authorName;
 }
