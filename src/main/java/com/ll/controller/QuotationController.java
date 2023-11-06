@@ -1,7 +1,7 @@
 package com.ll.controller;
 
 import com.ll.service.QuotationService;
-import com.ll.util.Rq;
+import com.ll.base.Rq;
 
 public class QuotationController {
     private final QuotationService quotationService = new QuotationService();

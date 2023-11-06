@@ -1,4 +1,4 @@
-package com.ll.util;
+package com.ll.base;
 
 import lombok.Getter;
 

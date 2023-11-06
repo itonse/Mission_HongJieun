@@ -2,7 +2,7 @@ package com.ll.service;
 
 import com.ll.domain.Quotation;
 import com.ll.repository.QuotationRepository;
-import com.ll.util.Rq;
+import com.ll.base.Rq;
 
 import java.util.List;
 import java.util.Scanner;

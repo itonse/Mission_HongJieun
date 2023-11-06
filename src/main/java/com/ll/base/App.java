@@ -1,7 +1,6 @@
-package com.ll;
+package com.ll.base;
 
 import com.ll.controller.QuotationController;
-import com.ll.util.Rq;
 
 import java.util.Scanner;
 
