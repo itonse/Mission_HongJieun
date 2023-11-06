@@ -1,6 +1,7 @@
 package com.ll.controller;
 
 import com.ll.service.QuotationService;
+import com.ll.util.Rq;
 
 import java.util.Scanner;
 
@@ -19,5 +20,9 @@ public class QuotationController {
 
     public void list() {
         quotationService.listQuotation();
+    }
+
+    public void delete(Rq rq) {
+        quotationService.deleteQuotation(rq);
     }
 }

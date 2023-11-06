@@ -26,6 +26,9 @@ public class App {
                 case "목록":
                     quotationController.list();
                     break;
+                case "삭제":
+                    quotationController.delete(rq);
+                    break;
                 default:
                     System.out.println("명령어를 정확히 입력해주세요.");
                     break;

@@ -15,6 +15,11 @@ public class Rq {
     public Rq(String cmd) {
         String[] cmdBits = cmd.split("\\?", 2);  // 명령을 '?' 를 기준으로 두 문자열로 분리
         action = cmdBits[0].trim();    // 첫 번째 문자열: 명령 종류  ex) 삭제
+
+        if (cmdBits.length == 1) {    // 두 번째 문자열이 없는 경우, 돌아가기 ex) cmd = "등록"
+            return;
+        }
+
         queryString = cmdBits[1].trim();     // 두 번째 문자열: 명령 파라미터(들)  ex) "id=5&name=John"
 
         String[] queryStringBits = queryString.split("&");    // (확장성) 명령 파라미터가 여러개일 경우, '&' 문자 기준으로 분리 ex) "id=5", "name=John"

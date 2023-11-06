@@ -2,6 +2,7 @@ package com.ll.service;
 
 import com.ll.domain.Quotation;
 import com.ll.repository.QuotationRepository;
+import com.ll.util.Rq;
 
 import java.util.List;
 
@@ -28,5 +29,13 @@ public class QuotationService {
         for (Quotation quotation : quotations) {
             System.out.println(quotation.getId() + " / " + quotation.getAuthorName() + " / " + quotation.getContent());
         }
+    }
+
+    public void deleteQuotation(Rq rq) {
+        int id = rq.parseInt("id", 0);
+
+        quotationRepository.deleteById(id);
+
+        System.out.println(id + "번 명언이 삭제되었습니다.");
     }
 }

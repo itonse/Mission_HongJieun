@@ -15,4 +15,8 @@ public class QuotationRepository {
     public List<Quotation> findAll() {
         return quotations;
     }
+
+    public void deleteById(int id) {
+        quotations.remove(id - 1);
+    }
 }
