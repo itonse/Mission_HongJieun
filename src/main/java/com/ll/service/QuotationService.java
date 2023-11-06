@@ -26,7 +26,12 @@ public class QuotationService {
 
         List<Quotation> quotations = quotationRepository.findAll();
 
-        for (Quotation quotation : quotations) {
+        if (quotations.isEmpty()) {
+            System.out.println("등록 된 명언이 없습니다.");
+        }
+
+        for (int i = quotations.size() - 1; i >= 0; i--) {
+            Quotation quotation = quotations.get(i);
             System.out.println(quotation.getId() + " / " + quotation.getAuthorName() + " / " + quotation.getContent());
         }
     }
@@ -36,6 +41,6 @@ public class QuotationService {
 
         quotationRepository.deleteById(id);
 
-        System.out.println(id + "번 명언이 삭제되었습니다.");
+        System.out.println(id);
     }
 }
