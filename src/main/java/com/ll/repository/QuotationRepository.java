@@ -8,7 +8,11 @@ import java.util.List;
 public class QuotationRepository {
     private final List<Quotation> quotations = new ArrayList<>();
 
-    public void addData(Quotation quotation) {
+    public void save(Quotation quotation) {
         quotations.add(quotation);
+    }
+
+    public List<Quotation> findAll() {
+        return quotations;
     }
 }

@@ -15,11 +15,13 @@ public class App {
             String request = scanner.nextLine();
 
             switch (request) {
-
                 case "종료":
                     return;
                 case "등록":
                     quotationController.add();
+                    break;
+                case "목록":
+                    quotationController.list();
                     break;
                 default:
                     System.out.println("명령어를 정확히 입력해주세요.");

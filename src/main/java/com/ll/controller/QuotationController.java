@@ -16,4 +16,8 @@ public class QuotationController {
 
         quotationService.addQuotation(inputContent, inputAuthorName);
     }
+
+    public void list() {
+        quotationService.listQuotation();
+    }
 }
