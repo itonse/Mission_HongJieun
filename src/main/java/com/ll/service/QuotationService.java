@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class QuotationService {
     private final QuotationRepository quotationRepository = new QuotationRepository();
-    private static int id = 0;
     private final Scanner scanner = new Scanner(System.in);
 
     public void addQuotation() {
@@ -25,8 +24,7 @@ public class QuotationService {
             return;
         }
 
-        Quotation quotation = new Quotation(++id, inputContent, inputAuthorName);
-        quotationRepository.save(quotation);
+        int id = quotationRepository.save(inputContent, inputAuthorName);
         System.out.println(id + "번 명언이 등록되었습니다.");
     }
 
@@ -103,7 +101,6 @@ public class QuotationService {
         List<Quotation> quotations = FilePersistence.loadQuotationsFromTextFile();
         if (quotations.size() > 0) {
             quotationRepository.setQuotations(quotations);
-            id = quotations.get(quotations.size() - 1).getId();
         }
     }
 

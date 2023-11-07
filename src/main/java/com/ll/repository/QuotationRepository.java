@@ -9,9 +9,11 @@ import java.util.stream.IntStream;
 
 public class QuotationRepository {
     private final List<Quotation> quotations = new ArrayList<>();
+    private static int lastId = 0;
 
-    public void save(Quotation quotation) {
-        quotations.add(quotation);
+    public int save(String content, String authorName) {
+        quotations.add(new Quotation(++lastId, content, authorName));
+        return lastId;
     }
 
     public List<Quotation> findAll() {
@@ -29,11 +31,7 @@ public class QuotationRepository {
     }
 
     public Optional<Quotation> findById(int id) {
-        if (findIndexById(id) == -1) {
-            return Optional.empty();
-        } else {
-            return Optional.of(quotations.get(findIndexById(id)));
-        }
+        return findIndexById(id) != -1 ? Optional.of(quotations.get(findIndexById(id))) : Optional.empty();
     }
 
     private int findIndexById(int id) {    // id에 해당하는 quotations 인덱스 찾기
@@ -46,5 +44,6 @@ public class QuotationRepository {
     public void setQuotations(List<Quotation> quotations) {
         this.quotations.clear();
         this.quotations.addAll(quotations);
+        lastId = quotations.get(quotations.size() - 1).getId();
     }
 }

@@ -11,14 +11,12 @@ import java.util.List;
 public class FilePersistence {
     private static final String TXT_FILE = "quotations.txt";   // 파일의 경로
 
-    public static void saveQuotationsToTextFile(List<Quotation> quotations) {     // 기존 파일에 덮어씌우기로 저장
+    public static void saveQuotationsToTextFile(List<Quotation> quotations) {   // 파일이 없을 경우 새로 생성하고, 기존에 존재할 경우 업데이트
         try (PrintWriter writer = new PrintWriter(TXT_FILE)) {    // PrintWriter를 사용하여 내용을 파일에 쓴다
             // 다음 저장 형식 형태로 한 줄씩 저장: 1 / 작자미상 / 현재를 사랑하라.
             for (Quotation quotation : quotations) {
                 writer.println(quotation.getId() + " / " + quotation.getAuthorName() + " / " + quotation.getContent());
             }
-        } catch (FileNotFoundException e) {
-            log.error(e.toString());
         } catch (IOException e) {
             log.error(e.toString());
         }

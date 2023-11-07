@@ -11,7 +11,7 @@ import java.util.List;
 
 @Slf4j
 public class JsonUtils {
-    public static final String JSON_FILE = "data1.json";    // 파일의 경로
+    public static final String JSON_FILE = "data.json";    // 파일의 경로
 
     public static void saveQuotationsToJsonFile(List<Quotation> quotations) {
         ObjectMapper mapper = new ObjectMapper();
