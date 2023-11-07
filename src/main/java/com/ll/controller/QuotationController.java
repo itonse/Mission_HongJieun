@@ -1,7 +1,7 @@
 package com.ll.controller;
 
-import com.ll.service.QuotationService;
 import com.ll.base.Rq;
+import com.ll.service.QuotationService;
 
 public class QuotationController {
     private final QuotationService quotationService = new QuotationService();
@@ -20,5 +20,13 @@ public class QuotationController {
 
     public void modify(Rq rq) {
         quotationService.modifyQuotation(rq);
+    }
+
+    public void fileLoad() {
+        quotationService.loadQuotationsFromFile();
+    }
+
+    public void fileSave() {
+        quotationService.saveQuotationsToFile();
     }
 }

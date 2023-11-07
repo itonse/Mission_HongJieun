@@ -1,8 +1,9 @@
 package com.ll.service;
 
+import com.ll.base.Rq;
 import com.ll.domain.Quotation;
 import com.ll.repository.QuotationRepository;
-import com.ll.base.Rq;
+import com.ll.util.FilePersistence;
 
 import java.util.List;
 import java.util.Optional;
@@ -90,5 +91,18 @@ public class QuotationService {
             return false;
         }
         return true;
+    }
+
+    public void saveQuotationsToFile() {
+        List<Quotation> quotations = quotationRepository.findAll();
+        FilePersistence.saveQuotationsToTextFile(quotations);
+    }
+
+    public void loadQuotationsFromFile() {
+        List<Quotation> quotations = FilePersistence.loadQuotationsFromTextFile();
+        if (quotations.size() > 0) {
+            quotationRepository.setQuotations(quotations);
+            id = quotations.get(quotations.size() - 1).getId();
+        }
     }
 }

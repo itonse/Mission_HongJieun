@@ -42,4 +42,9 @@ public class QuotationRepository {
                 .findFirst()
                 .orElse(-1);    // id에 해당하는 인덱스가 없을 시 -1 반환
     }
+
+    public void setQuotations(List<Quotation> quotations) {
+        this.quotations.clear();
+        this.quotations.addAll(quotations);
+    }
 }
