@@ -34,6 +34,9 @@ public class App {
                 case "수정":
                     quotationController.modify(rq);
                     break;
+                case "빌드":
+                    quotationController.jsonBuild();
+                    break;
                 default:
                     System.out.println("명령어를 정확히 입력해주세요.");
                     break;

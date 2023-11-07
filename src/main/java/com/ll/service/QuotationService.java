@@ -4,6 +4,7 @@ import com.ll.base.Rq;
 import com.ll.domain.Quotation;
 import com.ll.repository.QuotationRepository;
 import com.ll.util.FilePersistence;
+import com.ll.util.JsonUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -104,5 +105,11 @@ public class QuotationService {
             quotationRepository.setQuotations(quotations);
             id = quotations.get(quotations.size() - 1).getId();
         }
+    }
+
+    public void jsonBuild() {
+        List<Quotation> quotations = quotationRepository.findAll();
+        JsonUtils.saveQuotationsToJsonFile(quotations);
+        System.out.println(JsonUtils.JSON_FILE + " 파일의 내용이 갱신되었습니다.");
     }
 }

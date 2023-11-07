@@ -29,4 +29,8 @@ public class QuotationController {
     public void fileSave() {
         quotationService.saveQuotationsToFile();
     }
+
+    public void jsonBuild() {
+        quotationService.jsonBuild();
+    }
 }
