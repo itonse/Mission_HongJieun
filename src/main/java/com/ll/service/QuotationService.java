@@ -5,6 +5,7 @@ import com.ll.repository.QuotationRepository;
 import com.ll.base.Rq;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class QuotationService {
@@ -12,14 +13,11 @@ public class QuotationService {
     private static int id = 0;
     private final Scanner scanner = new Scanner(System.in);
 
-    private String inputContent;
-    private String inputAuthorName;
-
     public void addQuotation() {
         System.out.print("명언 : ");
-        inputContent = scanner.nextLine();
+        String inputContent = scanner.nextLine();
         System.out.print("작가 : ");
-        inputAuthorName = scanner.nextLine();
+        String inputAuthorName = scanner.nextLine();
 
         if (!isValidInput(inputContent, inputAuthorName)) {
             return;
@@ -60,28 +58,30 @@ public class QuotationService {
     public void modifyQuotation(Rq rq) {
         int id = rq.getParseInt("id", 0);
 
-        if (quotationRepository.existsById(id)) {
-            Quotation quotation = quotationRepository.findById(id);
+        Optional<Quotation> optionalQuotation = quotationRepository.findById(id);
 
-            System.out.print("명언(기존) : ");
-            System.out.println(quotation.getContent());
-            System.out.print("명언 : ");
-            inputContent = scanner.nextLine();
-
-            System.out.print("작가(기존) : ");
-            System.out.println(quotation.getAuthorName());
-            System.out.print("작가 : ");
-            inputAuthorName = scanner.nextLine();
-
-            if (!isValidInput(inputContent, inputAuthorName)) {
-                return;
-            }
-
-            quotation.setContent(inputContent);
-            quotation.setAuthorName(inputAuthorName);
-        } else {
+        if (optionalQuotation.isEmpty()) {
             System.out.println(id + "번 명언은 존재하지 않습니다.");
+            return;
         }
+        Quotation quotation = optionalQuotation.get();
+
+        System.out.print("명언(기존) : ");
+        System.out.println(quotation.getContent());
+        System.out.print("명언 : ");
+        String inputContent = scanner.nextLine();
+
+        System.out.print("작가(기존) : ");
+        System.out.println(quotation.getAuthorName());
+        System.out.print("작가 : ");
+        String inputAuthorName = scanner.nextLine();
+
+        if (!isValidInput(inputContent, inputAuthorName)) {
+            return;
+        }
+
+        quotation.setContent(inputContent);
+        quotation.setAuthorName(inputAuthorName);
     }
 
     private boolean isValidInput(String inputContent, String inputAuthorName) {
