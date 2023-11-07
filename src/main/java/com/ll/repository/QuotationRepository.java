@@ -17,20 +17,28 @@ public class QuotationRepository {
     }
 
     public void deleteById(int id) {
-        quotations.remove(id - 1);
+        quotations.remove(findIndexById(id));
     }
 
     public boolean existsById(int id) {
         try {
-            quotations.get(id - 1);
+            quotations.get(findIndexById(id));
         } catch (IndexOutOfBoundsException e) {
             return false;
         }
-
         return true;
     }
 
     public Quotation findById(int id) {
-        return quotations.get(id - 1);
+        return quotations.get(findIndexById(id));
+    }
+
+    private int findIndexById(int id) {
+        for (int i = 0; i < quotations.size(); i++) {
+            if (quotations.get(i).getId() == id) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
