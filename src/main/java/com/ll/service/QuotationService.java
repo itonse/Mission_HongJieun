@@ -92,12 +92,12 @@ public class QuotationService {
         return true;
     }
 
-    public void saveQuotationsToFile() {
+    public void saveQuotations() {
         List<Quotation> quotations = quotationRepository.findAll();
         FilePersistence.saveQuotationsToTextFile(quotations);
     }
 
-    public void loadQuotationsFromFile() {
+    public void loadQuotations() {
         List<Quotation> quotations = FilePersistence.loadQuotationsFromTextFile();
         if (quotations.size() > 0) {
             quotationRepository.setQuotations(quotations);

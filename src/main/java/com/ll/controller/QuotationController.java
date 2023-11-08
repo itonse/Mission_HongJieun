@@ -22,12 +22,12 @@ public class QuotationController {
         quotationService.modifyQuotation(rq);
     }
 
-    public void fileLoad() {
-        quotationService.loadQuotationsFromFile();
+    public void loadData() {
+        quotationService.loadQuotations();
     }
 
-    public void fileSave() {
-        quotationService.saveQuotationsToFile();
+    public void saveData() {
+        quotationService.saveQuotations();
     }
 
     public void jsonBuild() {

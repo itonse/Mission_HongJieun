@@ -9,7 +9,7 @@ public class App {
         QuotationController quotationController = new QuotationController();
         Scanner scanner = new Scanner(System.in);
 
-        quotationController.fileLoad();    // 파일 로드
+        quotationController.loadData();    // 로드 데이터
 
         System.out.println("== 명언 앱 ==");
 
@@ -20,7 +20,7 @@ public class App {
 
             switch (rq.getAction()) {
                 case "종료":
-                    quotationController.fileSave();    // 파일 저장
+                    quotationController.saveData();    // 파일 저장
                     return;
                 case "등록":
                     quotationController.add();
