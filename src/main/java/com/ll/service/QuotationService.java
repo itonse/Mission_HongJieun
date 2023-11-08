@@ -14,50 +14,37 @@ public class QuotationService {
     private final QuotationRepository quotationRepository = new QuotationRepository();
     private final Scanner scanner = new Scanner(System.in);
 
-    public void addQuotation() {
+    public Optional<Integer> addQuotation() {
         System.out.print("명언 : ");
         String inputContent = scanner.nextLine();
         System.out.print("작가 : ");
         String inputAuthorName = scanner.nextLine();
 
         if (!isValidInput(inputContent, inputAuthorName)) {
-            return;
+            return Optional.empty();
         }
 
         int id = quotationRepository.save(inputContent, inputAuthorName);
-        System.out.println(id + "번 명언이 등록되었습니다.");
+        return Optional.of(id);
     }
 
-    public void listQuotation() {
-        System.out.println("번호 / 작가 / 명언");
-        System.out.println("----------------------");
-
-        List<Quotation> quotations = quotationRepository.findAll();
-
-        if (quotations.isEmpty()) {
-            System.out.println("등록 된 명언이 없습니다.");
-        }
-
-        for (int i = quotations.size() - 1; i >= 0; i--) {
-            Quotation quotation = quotations.get(i);
-            System.out.println(quotation.getId() + " / " + quotation.getAuthorName() + " / " + quotation.getContent());
-        }
+    public List<Quotation> getQuotations() {
+        return quotationRepository.findAll();
     }
 
-    public void deleteQuotation(Rq rq) {
+    public boolean deleteQuotation(Rq rq) {
         int id = rq.getParseInt("id", 0);
 
         if (quotationRepository.existsById(id)) {
             quotationRepository.deleteById(id);
-            System.out.println(id + "번 명언이 삭제되었습니다.");
+            return true;
         } else {
-            System.out.println(id + "번 명언은 존재하지 않습니다.");
+            return false;
         }
     }
 
     public void modifyQuotation(Rq rq) {
         int id = rq.getParseInt("id", 0);
-
         Optional<Quotation> optionalQuotation = quotationRepository.findById(id);
 
         if (optionalQuotation.isEmpty()) {
@@ -107,6 +94,5 @@ public class QuotationService {
     public void jsonBuild() {
         List<Quotation> quotations = quotationRepository.findAll();
         JsonUtils.saveQuotationsToJsonFile(quotations);
-        System.out.println(JsonUtils.JSON_FILE + " 파일의 내용이 갱신되었습니다.");
     }
 }
