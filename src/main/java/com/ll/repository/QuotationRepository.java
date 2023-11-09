@@ -1,0 +1,49 @@
+package com.ll.repository;
+
+import com.ll.domain.Quotation;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.IntStream;
+
+public class QuotationRepository {
+    private final List<Quotation> quotations = new ArrayList<>();
+    private static int lastId = 0;
+
+    public int save(String content, String authorName) {
+        quotations.add(new Quotation(++lastId, content, authorName));
+        return lastId;
+    }
+
+    public List<Quotation> findAll() {
+        return new ArrayList<>(quotations);
+    }
+
+    public void deleteById(int id) {
+        if (existsById(id)) {
+            quotations.remove(findIndexById(id));
+        }
+    }
+
+    public boolean existsById(int id) {
+        return findIndexById(id) != -1;
+    }
+
+    public Optional<Quotation> findById(int id) {
+        return findIndexById(id) != -1 ? Optional.of(quotations.get(findIndexById(id))) : Optional.empty();
+    }
+
+    private int findIndexById(int id) {    // id에 해당하는 quotations 인덱스 찾기
+        return IntStream.range(0, quotations.size())
+                .filter(i -> quotations.get(i).getId() == id)
+                .findFirst()
+                .orElse(-1);    // id에 해당하는 인덱스가 없을 시 -1 반환
+    }
+
+    public void setQuotations(List<Quotation> quotations) {
+        this.quotations.clear();
+        this.quotations.addAll(quotations);
+        lastId = quotations.get(quotations.size() - 1).getId();
+    }
+}
