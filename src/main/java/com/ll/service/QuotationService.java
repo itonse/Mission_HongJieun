@@ -13,9 +13,8 @@ import java.util.Scanner;
 
 public class QuotationService {
     private final QuotationRepository quotationRepository = new QuotationRepository();
-    private final Scanner scanner = new Scanner(System.in);
 
-    public OptionalInt addQuotation() {
+    public OptionalInt addQuotation(Scanner scanner) {
         System.out.print("명언 : ");
         String inputContent = scanner.nextLine();
         System.out.print("작가 : ");
@@ -44,7 +43,7 @@ public class QuotationService {
         }
     }
 
-    public void modifyQuotation(Rq rq) {
+    public void modifyQuotation(Rq rq, Scanner scanner) {
         int id = rq.getParseInt("id", 0);
         Optional<Quotation> optionalQuotation = quotationRepository.findById(id);
 

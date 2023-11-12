@@ -12,9 +12,9 @@ import java.util.List;
 @Slf4j
 public class JsonUtils {
     public static final String JSON_FILE = "data.json";    // 파일의 경로
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void saveQuotationsToJsonFile(List<Quotation> quotations) {
-        ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);   // pretty print(보기 좋게 정렬) 활성화
 
         try {

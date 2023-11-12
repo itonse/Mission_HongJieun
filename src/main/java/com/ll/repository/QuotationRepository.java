@@ -31,7 +31,11 @@ public class QuotationRepository {
     }
 
     public Optional<Quotation> findById(int id) {
-        return findIndexById(id) != -1 ? Optional.of(quotations.get(findIndexById(id))) : Optional.empty();
+        if (findIndexById(id) == -1) {
+            return Optional.empty();
+        } else {
+            return Optional.of(quotations.get(findIndexById(id)));
+        }
     }
 
     private int findIndexById(int id) {    // id에 해당하는 quotations 인덱스 찾기

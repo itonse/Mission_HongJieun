@@ -5,9 +5,10 @@ import com.ll.controller.QuotationController;
 import java.util.Scanner;
 
 public class App {
+    private final Scanner scanner = new Scanner(System.in);
+
     public void run() {
         QuotationController quotationController = new QuotationController();
-        Scanner scanner = new Scanner(System.in);
 
         quotationController.loadData();    // 로드 데이터
 
@@ -21,9 +22,10 @@ public class App {
             switch (rq.getAction()) {
                 case "종료":
                     quotationController.saveData();    // 파일 저장
+                    scanner.close();
                     return;
                 case "등록":
-                    quotationController.add();
+                    quotationController.add(scanner);
                     break;
                 case "목록":
                     quotationController.list();
@@ -32,7 +34,7 @@ public class App {
                     quotationController.delete(rq);
                     break;
                 case "수정":
-                    quotationController.modify(rq);
+                    quotationController.modify(rq, scanner);
                     break;
                 case "빌드":
                     quotationController.jsonBuild();

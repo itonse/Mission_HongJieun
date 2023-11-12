@@ -7,12 +7,13 @@ import com.ll.util.JsonUtils;
 
 import java.util.List;
 import java.util.OptionalInt;
+import java.util.Scanner;
 
 public class QuotationController {
     private final QuotationService quotationService = new QuotationService();
 
-    public void add() {
-        OptionalInt quotationId = quotationService.addQuotation();
+    public void add(Scanner scanner) {
+        OptionalInt quotationId = quotationService.addQuotation(scanner);
         quotationId.ifPresent(id -> System.out.println(id + "번 명언이 등록되었습니다."));
     }
 
@@ -43,8 +44,8 @@ public class QuotationController {
         }
     }
 
-    public void modify(Rq rq) {
-        quotationService.modifyQuotation(rq);
+    public void modify(Rq rq, Scanner scanner) {
+        quotationService.modifyQuotation(rq, scanner);
     }
 
     public void loadData() {
