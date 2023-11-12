@@ -28,7 +28,7 @@ public class QuotationController {
         } else {
             for (int i = quotations.size() - 1; i >= 0; i--) {
                 Quotation quotation = quotations.get(i);
-                System.out.printf("%d / %s / %s", quotation.getId(), quotation.getAuthorName(), quotation.getContent());
+                System.out.printf("%d / %s / %s \n", quotation.getId(), quotation.getAuthorName(), quotation.getContent());
             }
         }
     }
