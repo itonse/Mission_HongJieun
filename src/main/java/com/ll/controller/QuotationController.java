@@ -6,13 +6,13 @@ import com.ll.service.QuotationService;
 import com.ll.util.JsonUtils;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.OptionalInt;
 
 public class QuotationController {
     private final QuotationService quotationService = new QuotationService();
 
     public void add() {
-        Optional<Integer> quotationId = quotationService.addQuotation();
+        OptionalInt quotationId = quotationService.addQuotation();
         quotationId.ifPresent(id -> System.out.println(id + "번 명언이 등록되었습니다."));
     }
 
@@ -27,7 +27,7 @@ public class QuotationController {
         } else {
             for (int i = quotations.size() - 1; i >= 0; i--) {
                 Quotation quotation = quotations.get(i);
-                System.out.println(quotation.getId() + " / " + quotation.getAuthorName() + " / " + quotation.getContent());
+                System.out.printf("%d / %s / %s", quotation.getId(), quotation.getAuthorName(), quotation.getContent());
             }
         }
     }

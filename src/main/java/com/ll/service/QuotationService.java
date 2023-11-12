@@ -8,24 +8,25 @@ import com.ll.util.JsonUtils;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.Scanner;
 
 public class QuotationService {
     private final QuotationRepository quotationRepository = new QuotationRepository();
     private final Scanner scanner = new Scanner(System.in);
 
-    public Optional<Integer> addQuotation() {
+    public OptionalInt addQuotation() {
         System.out.print("명언 : ");
         String inputContent = scanner.nextLine();
         System.out.print("작가 : ");
         String inputAuthorName = scanner.nextLine();
 
         if (!isValidInput(inputContent, inputAuthorName)) {
-            return Optional.empty();
+            return OptionalInt.empty();
         }
 
         int id = quotationRepository.save(inputContent, inputAuthorName);
-        return Optional.of(id);
+        return OptionalInt.of(id);
     }
 
     public List<Quotation> getQuotations() {

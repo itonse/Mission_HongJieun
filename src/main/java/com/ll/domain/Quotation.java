@@ -5,13 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
+@Getter
 public class Quotation {
-    @Getter
     private int id;
     @Setter
-    @Getter
     private String content;
     @Setter
-    @Getter
     private String authorName;
 }
