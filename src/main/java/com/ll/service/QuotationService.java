@@ -24,7 +24,8 @@ public class QuotationService {
             return OptionalInt.empty();
         }
 
-        int id = quotationRepository.save(inputContent, inputAuthorName);
+        Quotation quotation = new Quotation(quotationRepository.getLastId() + 1, inputContent, inputAuthorName);
+        int id = quotationRepository.save(quotation);
         return OptionalInt.of(id);
     }
 

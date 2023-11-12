@@ -11,9 +11,9 @@ public class QuotationRepository {
     private final List<Quotation> quotations = new ArrayList<>();
     private static int lastId = 0;
 
-    public int save(String content, String authorName) {
-        quotations.add(new Quotation(++lastId, content, authorName));
-        return lastId;
+    public int save(Quotation quotation) {
+        quotations.add(quotation);
+        return ++lastId;
     }
 
     public List<Quotation> findAll() {
@@ -49,5 +49,9 @@ public class QuotationRepository {
         this.quotations.clear();
         this.quotations.addAll(quotations);
         lastId = quotations.get(quotations.size() - 1).getId();
+    }
+
+    public int getLastId() {
+        return lastId;
     }
 }
